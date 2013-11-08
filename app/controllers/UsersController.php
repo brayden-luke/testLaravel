@@ -187,7 +187,6 @@ class UsersController extends \BaseController {
         
         public function login()      
         {
-            require 'aaa.php';
             if(Config::get('app.debug_level') == 3){ 
                 Log::info('status code:' .http_response_code(). '., Previous url:'.URL::previous().'., Current url:' .Request::url()."method: login");
             }
