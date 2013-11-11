@@ -17,7 +17,7 @@
    @if(isset($message))
    <div class="alert alert-error">
 				<a href="#" class="close" data-dismiss='alert'>&times</a>
-   {{$message}}
+   					<div>{{$message}}</div>
    </div>
    @endif
    @if($errors->any())
