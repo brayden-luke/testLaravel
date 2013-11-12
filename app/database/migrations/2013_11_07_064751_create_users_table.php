@@ -20,6 +20,16 @@ class CreateUsersTable extends Migration {
 			$table->text('email');
 			$table->text('password');
 		});
+
+		Schema::create('activations', function(Blueprint $table)
+		{
+			$table->increments('id');
+			$table->timestamps();
+			$table->integer('userid');
+			$table->foreign('userid')->references('id')->on('users');
+			$table->activation_key('email');
+			$table->activation_status('password');
+		});
 	}
 
 	/**

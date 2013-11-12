@@ -62,11 +62,12 @@ class UsersController extends \BaseController {
                 $user->account_status = 0;
                 $user->save();
 
-                $formdata['code'] = hash_hmac('sha256', 'email' . "\n" . 'pswd', uniqid(time()));
+                $formdata['code'] = hash_hmac('sha256', $formdata['email'] . "\n" .$password, uniqid(time()));
 
 
                 $data = array(
                     'activation_code' => $formdata['code'],
+					'id' => $user->id,
                  );
 				$activation = new Activation();
 				$activation->userid = $user->id;
@@ -127,7 +128,7 @@ class UsersController extends \BaseController {
                 return Redirect::to('login')->with('errors',$message)->withInput();
             }           
         }
-        
+
         public function postedit()
         {
             if(Config::get('app.debug_level') == 3){ 
@@ -205,7 +206,8 @@ class UsersController extends \BaseController {
         
 	public function login()
 	{
-		if(Config::get('app.debug_level') == 3){
+		if(Config::get('app.debug_level') == 3)
+		{
 			Log::info('status code:' .http_response_code(). '., Previous url:'.URL::previous().'., Current url:' .Request::url().", Current Route: ".$this->getRoutes().", Current Method: ".__FUNCTION__);
 		}
 
@@ -261,11 +263,6 @@ class UsersController extends \BaseController {
 	   
 	}	
 
-	/**
-	 * Get the current route being executed.
-	 *
-	 * @return \Illuminate\Routing\Route
-	 */
 	public function getRoutes()
 	{
 		return Route::getCurrentRoute()->getPath();
