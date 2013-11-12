@@ -62,7 +62,7 @@ class UsersController extends \BaseController {
                 $user->account_status = 0;
                 $user->save();
 
-                $formdata['code'] = hash_hmac('sha256', 'email' . "\n" . 'pswd', uniqid(time()));
+                $formdata['code'] = hash_hmac('sha256', $formdata['email'] . "\n" . $password, uniqid(time()));
 
 
                 $data = array(
