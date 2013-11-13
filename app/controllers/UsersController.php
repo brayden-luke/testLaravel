@@ -234,7 +234,9 @@ class UsersController extends \BaseController {
 			$result = Activation::where('activation_key','=',Input::get('activation_code'))->first();
 			if($result)
 			{
-				DB::insert('update activations set activation_status = 1 where userid=?', array($userid));
+				//DB::insert('update activations set activation_status = 1 where userid=?', array($userid));
+				$result->activation_status = 1;
+				$result->save();
 				$user = User::find($userid);
 				$user->account_status = 1;
 				$user->save();
@@ -258,14 +260,11 @@ class UsersController extends \BaseController {
 		{
 			Auth::logout();
 		}
-
 		return Redirect::to('users');
-	   
 	}	
 
 	public function getRoutes()
 	{
 		return Route::getCurrentRoute()->getPath();
 	}
-
 }

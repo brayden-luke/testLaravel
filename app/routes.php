@@ -10,6 +10,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Log::info("Entered route: ".Request::url());
 Route::get('/', function(){
             return View::make('userindex');
 });

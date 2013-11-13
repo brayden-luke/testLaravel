@@ -1,5 +1,4 @@
 <?php
-define ('DEBUG_LEVEL','3');
 return array(
 
 	/*
@@ -23,7 +22,7 @@ return array(
 	| Available values are 1 - error, 2- warning, 3 - info.
 	|
 	*/
-        'debug_level' => 1,
+        'debug_level' => 3,
         
 	/*
 	|--------------------------------------------------------------------------
