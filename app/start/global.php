@@ -81,8 +81,10 @@ App::error(function(Exception $pException, $code)
 	}
     $warnings = array(2,32,128, 512);
     if( Config::get('app.debug_level') == 2 && in_array($pException->getCode(), $warnings) ){
+		Log::info("Entered route: ".Request::url());
         Log::warning($pException);
     } elseif( Config::get('app.debug_level') != 3 ) {
+		Log::info("Entered route: ".Request::url());
         Log::error($pException);
     }
 });
