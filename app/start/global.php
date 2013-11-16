@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Register The Laravel Class Loader
@@ -47,15 +46,56 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 | shown, which includes a detailed stack trace during debug.
 |
 */
-App::error(function(Exception $exception, $code)
+/*App::error(function(NotFoundException $exception)
 {
+	echo "notfound ex";die;
+});
+
+App::error(function(PDOException $exception, $code)
+{
+	echo "pdo";die;
+//when mysql exception
+//handle and e-mail
+});
+
+App::error(function(ReflectionException $exception) {
+	die('reflective exception');
+
+});*/
+
+App::error(function(Exception $pException, $code)
+{
+//	$a = new ReflectionClass($pException);
+	$arrTrace = $pException->getTrace();
+	$arrLastTrace = $arrTrace[0];
+	if($arrLastTrace['function']=="handleQueryException")
+	{
+		$data = array(
+			'message' => $pException->getMessage(),
+			'type' => "Database error",
+		);
+		Mail::queue('emails.errorhandle',$data,function($m)
+		{
+			$m->to('lukebrayden7@gmail.com')->subject('Database Error Handling');
+		});
+	}
     $warnings = array(2,32,128, 512);
-    if( Config::get('app.debug_level') == 2 && in_array($exception->getCode(), $warnings) ){
-        Log::warning($exception);
+    if( Config::get('app.debug_level') == 2 && in_array($pException->getCode(), $warnings) ){
+        Log::warning($pException);
     } elseif( Config::get('app.debug_level') != 3 ) {
-        Log::error($exception);
+        Log::error($pException);
     }
 });
+
+/*App::error(function(PDOException $exception, $code)
+{
+	$a = new ReflectionClass($exception);
+	var_dump($a->name); exit;
+	//when mysql exception
+	//handle and e-mail
+});*/
+
+
 
 /*
 |--------------------------------------------------------------------------
