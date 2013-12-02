@@ -122,7 +122,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-
+		'Jenssegers\Mongodb\MongodbServiceProvider',
 	),
 
 	/*
@@ -143,7 +143,7 @@ return array(
 	| Class Aliases
 	|--------------------------------------------------------------------------
 	|
-	| This array of class aliases will be registered when this application
+	| This array of clas s aliases will be registered when this application
 	| is started. However, feel free to register as many as you wish as
 	| the aliases are "lazy" loaded so they don't hinder performance.
 	|
@@ -187,6 +187,7 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+		'Moloquent'		  => 'Jenssegers\Mongodb\Model',
 
 	),
 

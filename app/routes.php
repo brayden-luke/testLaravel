@@ -12,15 +12,17 @@
 */
 
 Route::get('/', function(){
-            return View::make('userindex');
+            return View::make('dataindex');
 });
-Route::resource('users', 'UsersController');
-Route::resource('login', 'UsersController@login');
-Route::resource('register', 'UsersController@create');
-Route::post('postregister', 'UsersController@postregister');
-Route::post('postlogin', 'UsersController@postlogin');
-Route::post('postedit', 'UsersController@postedit');
-Route::resource('logout', 'UsersController@logout');
+Route::resource('data', 'DataController');
+Route::resource('alldata', 'DataController@showall');
+Route::resource('register', 'DataController@create');
+Route::post('postregister', 'DataController@postregister');
+Route::post('postlogin', 'DataController@postlogin');
+Route::post('postedit', 'DataController@postedit');
+Route::resource('logout', 'DataController@logout');
+Route::get('editdata/{id}', 'DataController@editdata');
+Route::get('delete/{id}','DataController@deletedata');
 
 
 
