@@ -16,17 +16,4 @@ class Data extends Eloquent {
 		}
 		return false;
 	}
-	public function updatedata($id,$data)
-	{
-		$this->where('_id',Input::get('_id'));//->update($data);
-		foreach($data as $key=>$value)
-		{
-			$this->$key = $value;
-		}
-		$this->save();
-		//var_dump($result);die;
-
-	}
-
-
 }
