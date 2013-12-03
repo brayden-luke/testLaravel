@@ -18,7 +18,7 @@
                                 {{implode('', $errors->all('<div>:message</div>'))}}
     </div>
    @endif
-   <div>id {{Form::text('id',$data['_id'],array('disabled'))}}</div>
+   <div style="display:none">id {{Form::text('id',$data['_id'])}}</div>
    <div>Uid {{Form::text('uid',$data['uid'],array('placeholder'=>'Uid'))}}</div>
 	<div>Network Id {{Form::text('nid',$data['nid'],array('placeholder'=>'Network Id'))}}</div>
 	<div>Network Name   {{Form::text('network_name',$data['network_name'],array('placeholder'=>'Network Name'))}}</div>
