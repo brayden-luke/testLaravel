@@ -5,7 +5,7 @@
     {{ HTML::script('js/bootstrap.js') }}
     {{ HTML::style('css/bootstrap.css') }}
     <meta charset="UTF-8">
-    <title>Main Users page</title>    
+    <title>Main Users page</title>
 </head>
 <body>
    <div class="row text-center ">
@@ -23,11 +23,11 @@
 			{{Form::text('nid','',array('placeholder'=>'Network id'))}}
 			{{Form::text('network_name','',array('placeholder'=>'Network Name'))}}
 			{{Form::text('ip_address','',array('placeholder'=>'IP address'))}}
-			{{Form::text('nstatus','',array('placeholder'=>'Network Status'))}}
-   {{Form::text('hostname','',array('placeholder'=>'Host Name'))}}
-	{{Form::text('block','',array('placeholder'=>'Hostname Block'))}}
-   {{Form::submit('Register',array('class'=>'btn btn-success'))}}
 
+   {{Form::text('hostname','',array('placeholder'=>'Host Name'))}}
+			Network Status {{Form::checkbox('nstatus')}}
+	Block: {{Form::checkbox('block')}}<br /><br />
+   {{Form::submit('Create',array('class'=>'btn btn-success'))}}
    {{HTML::link('/','Cancel',array('class'=>'btn btn-danger'))}}
    {{Form::close()}} 
    </div>

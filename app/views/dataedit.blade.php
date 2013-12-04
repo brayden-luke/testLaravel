@@ -23,9 +23,10 @@
 	<div>Network Id {{Form::text('nid',$data['nid'],array('placeholder'=>'Network Id'))}}</div>
 	<div>Network Name   {{Form::text('network_name',$data['network_name'],array('placeholder'=>'Network Name'))}}</div>
 	<div>Network IP Address   {{Form::text('ip_address',$data['ip_address'],array('placeholder'=>'Network IP Address'))}}</div>
-	<div>Network Status   {{Form::text('nstatus',$data['nstatus'],array('placeholder'=>'Network Status'))}}</div>
 	<div>Hostname   {{Form::text('hostname',$data['hostname'],array('placeholder'=>'Hostname'))}}</div>
-	<div>Block   {{Form::text('block',$data['block'],array('placeholder'=>'Block'))}}</div>
+			<div>Network Status {{Form::checkbox('nstatus')}}</div>
+			<div>Block: {{Form::checkbox('block')}}</div>
+			<br />
 	  {{Form::submit('Save',array('class'=>'btn btn-success'))}}
 	   {{HTML::link('alldata','Cancel',array('class'=>'btn btn-danger'))}}
 	   {{Form::close()}}

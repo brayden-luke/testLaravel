@@ -25,17 +25,34 @@
 					<td></td>
 
 				</tr>
-<?php //echo "<pre>";var_dump($alldata);die;
-				foreach($alldata as $data){?>
+<?php
+				foreach($alldata as $data){
+					if($data['attributes']['nstatus'])
+					{
+						$nstatus = 'true';
+					}
+					else
+					{
+						$nstatus = 'false';
+					}
+					if($data['attributes']['block'])
+					{
+						$block = 'true';
+					}
+					else
+					{
+						$block = 'false';
+					}
+					?>
 <tr>
   <td>{{$data['attributes']['_id']}}</td>
   <td>{{$data['attributes']['uid']}}</td>
   <td>{{$data['attributes']['nid']}}</td>
   <td>{{$data['attributes']['network_name']}}</td>
   <td>{{$data['attributes']['ip_address']}}</td>
-  <td>{{$data['attributes']['nstatus']}}</td>
+  <td>{{$nstatus}}</td>
   <td>{{$data['attributes']['hostname']}}</td>
-  <td>{{$data['attributes']['block']}}</td>
+  <td>{{$block}}</td>
   <td>{{HTML::link('editdata/'.$data['attributes']['_id'],'Update')}}<br>{{HTML::link('delete/'.$data['attributes']['_id'],'Delete')}}</td>
 </tr>
 			<?php }

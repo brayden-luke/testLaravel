@@ -29,15 +29,25 @@ class DataController extends \BaseController {
 			'nid'=> Input::get('nid'),
 			'network_name' => Input::get('network_name'),
 			'ip_address' => Input::get('ip_address'),
-			'nstatus' => Input::get('nstatus'),
 			'hostname' => Input::get('hostname'),
-			'block' => Input::get('block'),
 		);
-		if($this->pData->savedata($formdata))
+		$formdata['nstatus'] = false;
+		$formdata['block'] = false;
+		if(Input::get('nstatus'))
+		{
+			$formdata['nstatus'] = true;
+		}
+		if(Input::get('block'))
+		{
+			$formdata['block'] = true;
+		}
+		$result = $this->pData->savedata($formdata);
+		if($result === true)
 		{
 			return View::make('dataindex')->with('message', 'saved successfully');
 		}
-		return Redirect::to('register');
+		return Redirect::to('register')->with('errors', $result)->withinput();
+
 	}
 
 	public function showall()
@@ -53,12 +63,38 @@ class DataController extends \BaseController {
 			'nid'=> Input::get('nid'),
 			'network_name' => Input::get('network_name'),
 			'ip_address' => Input::get('ip_address'),
-			'nstatus' => Input::get('nstatus'),
 			'hostname' => Input::get('hostname'),
-			'block' => Input::get('block'),
-		);		
-		$this->pData->where('_id',Input::get('id'))->update($formdata);
-		return View::make('dataindex')->with('message', 'Updated successfully');
+		);
+
+		$formdata['nstatus'] = false;
+		$formdata['block'] = false;
+		if(Input::get('nstatus'))
+		{
+			$formdata['nstatus'] = true;
+		}
+		if(Input::get('block'))
+		{
+			$formdata['block'] = true;
+		}
+		$rules = array(
+			'uid' => 'Required|Min:3|Max:80|Alpha',
+			'nid'=> 'Required|Between:1,64',
+			'network_name' => 'Required|Between:3,64',
+			'ip_address' => 'Required|AlphaNum|Between:6,30',
+			'hostname' => 'Required|AlphaNum|Between:3,64'
+		);
+		$valid = Validator::make($formdata, $rules);
+		if($valid->passes())
+		{
+			$this->pData->where('_id',Input::get('id'))->update($formdata);
+			return View::make('dataindex')->with('message', 'Updated successfully');
+		}
+		else
+		{
+			$data = $this->pData->find(Input::get('id'));
+			$data = $data['attributes'];
+			return View::make('dataedit')->with('data',$data)->with('errors',$valid->messages());
+		}
 	}
 
 	public function deletedata($id)
