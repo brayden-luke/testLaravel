@@ -24,7 +24,10 @@ Route::resource('logout', 'DataController@logout');
 Route::get('editdata/{id}', 'DataController@editdata');
 Route::get('delete/{id}','DataController@deletedata');
 
-
+Route::get('objects/{id}/json', array('as' => 'objects.json', 'uses' => 'ObjectsController@json'));
+Route::resource('objects', 'ObjectsController');
+Route::resource('objects.hostnames', 'HostnamesController');
+Route::resource('objects.networks', 'NetworksController');
 
 
 
